@@ -10,17 +10,12 @@ import { ResetPasswordPage } from './reset-password.page';
 const routes: Routes = [
   {
     path: '',
-    component: ResetPasswordPage
-  }
+    component: ResetPasswordPage,
+  },
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes)
-  ],
-  declarations: [ResetPasswordPage]
+  imports: [CommonModule, FormsModule, IonicModule, RouterModule.forChild(routes)],
+  declarations: [ResetPasswordPage],
 })
 export class ResetPasswordPageModule {}

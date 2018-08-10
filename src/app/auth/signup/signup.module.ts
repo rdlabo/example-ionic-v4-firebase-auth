@@ -10,17 +10,12 @@ import { SignupPage } from './signup.page';
 const routes: Routes = [
   {
     path: '',
-    component: SignupPage
-  }
+    component: SignupPage,
+  },
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes)
-  ],
-  declarations: [SignupPage]
+  imports: [CommonModule, FormsModule, IonicModule, RouterModule.forChild(routes)],
+  declarations: [SignupPage],
 })
 export class SignupPageModule {}
