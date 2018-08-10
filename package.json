@@ -9,7 +9,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "formatter": "prettier --parser typescript --single-quote --write \"./**/*.ts\""
   },
   "private": true,
   "dependencies": {
@@ -31,14 +32,15 @@
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
-    "@angular/cli": "~6.1.1",
-    "@angular/compiler": "~6.1.1",
-    "@angular/compiler-cli": "~6.1.1",
-    "@angular/language-service": "~6.1.1",
     "@angular-devkit/architect": "~0.7.2",
     "@angular-devkit/build-angular": "~0.7.2",
     "@angular-devkit/core": "~0.7.2",
     "@angular-devkit/schematics": "~0.7.2",
+    "@angular/cli": "~6.1.1",
+    "@angular/compiler": "~6.1.1",
+    "@angular/compiler-cli": "~6.1.1",
+    "@angular/language-service": "~6.1.1",
+    "@kaizenplatform/prettier-config": "^0.1.0",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~10.5.2",
@@ -50,10 +52,15 @@
     "karma-coverage-istanbul-reporter": "~2.0.0",
     "karma-jasmine": "~1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "pre-commit": "^1.2.2",
+    "prettier": "^1.14.2",
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
     "typescript": "~2.7.2"
   },
-  "description": "An Ionic project"
+  "description": "An Ionic project",
+  "pre-commit": [
+    "formatter"
+  ]
 }
