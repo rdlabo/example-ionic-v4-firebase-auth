@@ -23,7 +23,13 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
   ],
-  providers: [StatusBar, SplashScreen, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, AngularFireAuth, AuthService],
+  providers: [
+    StatusBar,
+    SplashScreen,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    AngularFireAuth,
+    AuthService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

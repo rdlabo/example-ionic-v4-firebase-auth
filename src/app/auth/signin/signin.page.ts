@@ -12,7 +12,7 @@ export class SigninPage implements OnInit {
     password: string;
   } = {
     email: null,
-    password: null
+    password: null,
   };
   loading: boolean = false;
   constructor(public auth: AuthService) {}
@@ -21,9 +21,9 @@ export class SigninPage implements OnInit {
 
   async doSingIn() {
     this.loading = true;
-    const s = await this.auth.signIn(this.login.email, this.login.password)
-      .catch(e => console.log(e));
-    if (s) {} // redirect
+    const s = await this.auth.signIn(this.login.email, this.login.password).catch(e => console.log(e));
+    if (s) {
+    } // redirect
     this.loading = false;
   }
 }
