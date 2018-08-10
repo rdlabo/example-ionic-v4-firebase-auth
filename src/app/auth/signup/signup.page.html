@@ -9,13 +9,14 @@
     <ion-list>
       <ion-item>
         <ion-label position="floating">Email</ion-label>
-        <ion-input required type="text"></ion-input>
+        <ion-input required type="text" [(ngModel)]="login.email" name="login.email"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Password</ion-label>
-        <ion-input required type="password"></ion-input>
+        <ion-input required type="password" [(ngModel)]="login.password" name="login.password"></ion-input>
       </ion-item>
     </ion-list>
-    <ion-button fill="outline" expand="block">Sign In</ion-button>
+    <ion-button fill="outline" expand="block" [disabled]="!f.form.valid || loading" (click)="doSingUp()">Sign Up</ion-button>
   </form>
 </ion-content>
+
