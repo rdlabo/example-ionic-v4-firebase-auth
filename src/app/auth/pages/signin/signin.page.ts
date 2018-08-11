@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -15,15 +16,20 @@ export class SigninPage implements OnInit {
     password: null,
   };
   loading: boolean = false;
-  constructor(public auth: AuthService) {}
+  constructor(public auth: AuthService, public router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.auth.getState().subscribe(data => {
+      if (data && data.emailVerified) {
+        this.router.navigate(['/']);
+      } else if (data !== null) {
+        this.router.navigate(['/auth/confirm']);
+      }
+    });
+  }
 
   async doSingIn() {
     this.loading = true;
-    const s = await this.auth.signIn(this.login.email, this.login.password).catch(e => console.log(e));
-    if (s) {
-    } // redirect
-    this.loading = false;
+    await this.auth.signIn(this.login.email, this.login.password).catch(error => (this.loading = false));
   }
 }

@@ -1,47 +1,82 @@
 import { Injectable } from '@angular/core';
+import { AlertController, ToastController } from '@ionic/angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { User, auth } from 'firebase';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(public afAuth: AngularFireAuth) {}
+  constructor(public afAuth: AngularFireAuth, public alertCtrl: AlertController, public toastCtrl: ToastController) {}
 
   getState(): Observable<User | null> {
     return this.afAuth.authState;
-    // .pipe(
-    //   map(data => {
-    //     return (data.emailVerified) ? data : null;
-    //   })
-    // );
   }
-  signUp(email: string, password: string): Promise<firebase.auth.UserCredential> {
-    return new Promise<any>(async (resolve, reject) => {
-      await this.afAuth.auth.createUserWithEmailAndPassword(email, password).catch(error => reject(error));
-      this.sendEmailVerification().then(data => resolve(data), error => reject(error));
-    });
+  async signUp(email: string, password: string): Promise<void> {
+    try {
+      await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+      this.sendEmailVerification();
+    } catch (e) {
+      this.alertError(e);
+      throw new Error(e);
+    }
   }
-  signIn(email: string, password: string): Promise<firebase.auth.UserCredential> {
-    return new Promise<any>((resolve, reject) => {
-      this.afAuth.auth.signInWithEmailAndPassword(email, password).then(data => resolve(data), error => reject(error));
-    });
+  async signIn(email: string, password: string): Promise<void> {
+    try {
+      await this.afAuth.auth.signInWithEmailAndPassword(email, password);
+    } catch (e) {
+      this.alertError(e);
+      throw new Error(e);
+    }
   }
-  signOut(): Promise<void> {
-    return new Promise<any>((resolve, reject) => {
-      this.afAuth.auth.signOut().then(data => resolve(data), error => reject(error));
-    });
+  async signOut(): Promise<void> {
+    try {
+      await this.afAuth.auth.signOut();
+      const toast = await this.toastCtrl.create({
+        message: 'Logout',
+        duration: 2000,
+      });
+      toast.present();
+    } catch (e) {
+      this.alertError(e);
+      throw new Error(e);
+    }
   }
-  resetPassword(email: string): Promise<void> {
-    return new Promise((resolve, reject) => {
-      this.afAuth.auth.sendPasswordResetEmail(email).then(data => resolve(data), error => reject(error));
-    });
+  async resetPassword(email: string): Promise<void> {
+    try {
+      await this.afAuth.auth.sendPasswordResetEmail(email);
+      const toast = await this.toastCtrl.create({
+        message: 'Send e-mail about how to reset passoword',
+        duration: 2000,
+      });
+      toast.present();
+    } catch (e) {
+      this.alertError(e);
+      throw new Error(e);
+    }
   }
   async sendEmailVerification(): Promise<void> {
-    const user = await this.afAuth.auth.currentUser;
-    return user.sendEmailVerification();
+    try {
+      const user = await this.afAuth.auth.currentUser;
+      await user.sendEmailVerification();
+      const toast = await this.toastCtrl.create({
+        message: 'Send verify e-mail',
+        duration: 2000,
+      });
+      toast.present();
+    } catch (e) {
+      this.alertError(e);
+      throw new Error(e);
+    }
+  }
+  private async alertError(e): Promise<void> {
+    const alert = await this.alertCtrl.create({
+      header: e.code,
+      message: e.message,
+      buttons: ['OK'],
+    });
+    await alert.present();
   }
 }

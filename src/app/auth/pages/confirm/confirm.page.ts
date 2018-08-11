@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastController } from '@ionic/angular';
 import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
 
@@ -9,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./confirm.page.scss'],
 })
 export class ConfirmPage implements OnInit {
-  constructor(public auth: AuthService, public toastCtrl: ToastController, public router: Router) {}
+  constructor(public auth: AuthService, public router: Router) {}
 
   ngOnInit() {
     this.auth.getState().subscribe(data => {
@@ -21,10 +20,5 @@ export class ConfirmPage implements OnInit {
 
   async sendVerify() {
     await this.auth.sendEmailVerification();
-    const toast = await this.toastCtrl.create({
-      message: 'Send verify e-mail',
-      duration: 2000,
-    });
-    toast.present();
   }
 }
