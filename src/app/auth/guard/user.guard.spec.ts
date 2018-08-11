@@ -5,7 +5,7 @@ import { UserGuard } from './user.guard';
 describe('UserGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [UserGuard]
+      providers: [UserGuard],
     });
   });
 
