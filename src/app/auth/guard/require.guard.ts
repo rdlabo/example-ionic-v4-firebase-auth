@@ -17,13 +17,9 @@ export class RequireGuard implements CanActivate {
           return true;
         } else {
           this.router.navigate(['/home']);
-          return null;
+          return false;
         }
       }),
     );
-  }
-
-  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    return this.canActivate(route, state);
   }
 }

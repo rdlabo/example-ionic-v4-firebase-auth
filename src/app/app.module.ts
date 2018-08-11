@@ -13,6 +13,7 @@ import { AuthService } from './auth/auth.service';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
+import { UserGuard, RequireGuard, ConfirmGuard } from './auth/guard';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +30,9 @@ import { environment } from '../environments/environment';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AngularFireAuth,
     AuthService,
+    UserGuard,
+    RequireGuard,
+    ConfirmGuard,
   ],
   bootstrap: [AppComponent],
 })

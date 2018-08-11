@@ -10,22 +10,28 @@ import { SigninPage } from './pages/signin/signin.page';
 import { ConfirmPage } from './pages/confirm/confirm.page';
 import { ResetPasswordPage } from './pages/reset-password/reset-password.page';
 
+import { RequireGuard, ConfirmGuard } from './guard';
+
 const routes: Routes = [
   {
     path: 'signup',
     component: SignupPage,
+    canActivate: [RequireGuard],
   },
   {
     path: 'signin',
     component: SigninPage,
+    canActivate: [RequireGuard],
   },
   {
     path: 'confirm',
     component: ConfirmPage,
+    canActivate: [ConfirmGuard],
   },
   {
     path: 'reset_password',
     component: ResetPasswordPage,
+    canActivate: [RequireGuard],
   },
 ];
 

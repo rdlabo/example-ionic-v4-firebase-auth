@@ -8,16 +8,19 @@ import { AuthService } from './../auth.service';
   providedIn: 'root',
 })
 export class ConfirmGuard implements CanActivate {
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService, private router: Router) {
+    console.log('construct');
+  }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.auth.getState().pipe(
       map(data => {
+        console.log(data);
         if (data !== null && !data.emailVerified) {
           return true;
         } else {
           this.router.navigate(['/auth/singin']);
-          return null;
+          return false;
         }
       }),
     );

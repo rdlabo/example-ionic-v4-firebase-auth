@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -15,14 +16,14 @@ export class SignupPage implements OnInit {
     password: null,
   };
   loading: boolean = false;
-  constructor(public auth: AuthService) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.auth.getState().subscribe(data => {
       if (data && data.emailVerified) {
-        // redirect after login
+        this.router.navigate(['/']);
       } else if (data !== null) {
-        // redirect cert page
+        this.router.navigate(['/auth/confirm']);
       }
     });
   }

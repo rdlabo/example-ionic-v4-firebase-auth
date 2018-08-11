@@ -22,8 +22,7 @@ export class AuthService {
   signUp(email: string, password: string): Promise<firebase.auth.UserCredential> {
     return new Promise<any>(async (resolve, reject) => {
       await this.afAuth.auth.createUserWithEmailAndPassword(email, password).catch(error => reject(error));
-      const user = await this.afAuth.auth.currentUser;
-      user.sendEmailVerification().then(data => resolve(data), error => reject(error));
+      this.sendEmailVerification().then(data => resolve(data), error => reject(error));
     });
   }
   signIn(email: string, password: string): Promise<firebase.auth.UserCredential> {
@@ -40,5 +39,9 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       this.afAuth.auth.sendPasswordResetEmail(email).then(data => resolve(data), error => reject(error));
     });
+  }
+  async sendEmailVerification(): Promise<void> {
+    const user = await this.afAuth.auth.currentUser;
+    return user.sendEmailVerification();
   }
 }
