@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-signin',
@@ -16,7 +17,7 @@ export class SigninPage implements OnInit {
     password: null,
   };
   loading: boolean = false;
-  constructor(public auth: AuthService, public router: Router) {}
+  constructor(public auth: AuthService, public router: Router, public navCtrl: NavController) {}
 
   ngOnInit() {
     this.auth.getState().subscribe(data => {
