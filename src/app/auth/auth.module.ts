@@ -5,10 +5,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SignupPage } from './signup/signup.page';
-import { SigninPage } from './signin/signin.page';
-import { ConfirmPage } from './confirm/confirm.page';
-import { ResetPasswordPage } from './reset-password/reset-password.page';
+import { SignupPage } from './pages/signup/signup.page';
+import { SigninPage } from './pages/signin/signin.page';
+import { ConfirmPage } from './pages/confirm/confirm.page';
+import { ResetPasswordPage } from './pages/reset-password/reset-password.page';
 
 const routes: Routes = [
   {
