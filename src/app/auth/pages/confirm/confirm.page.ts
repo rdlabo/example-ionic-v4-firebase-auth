@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
-import { timer, Subscription} from 'rxjs';
+import { timer, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-confirm',
