@@ -1,15 +1,32 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 
-import { AuthGuard } from './require.guard';
+import { RequireGuard } from './require.guard';
+import { AuthService } from '@/auth/auth.service';
+import { AngularFireModule } from 'angularfire2';
+import { environment } from '../../../environments/environment';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AlertController, IonicModule } from '@ionic/angular';
+import { Router } from '@angular/router';
 
-describe('AuthGuard', () => {
+describe('RequireGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AuthGuard],
+      imports: [IonicModule.forRoot(), AngularFireModule.initializeApp(environment.firebase)],
+      providers: [
+        RequireGuard,
+        AuthService,
+        AngularFireAuth,
+        {
+          provide: Router,
+          useClass: class {
+            navigate = jasmine.createSpy('navigate');
+          },
+        },
+      ],
     });
   });
 
-  it('should ...', inject([AuthGuard], (guard: AuthGuard) => {
+  it('should ...', inject([RequireGuard, AuthService, AngularFireAuth, AlertController], (guard: RequireGuard) => {
     expect(guard).toBeTruthy();
   }));
 });
