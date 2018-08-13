@@ -16,6 +16,5 @@ export class ResetPasswordPage implements OnInit {
   sendResetPassword() {
     this.loading = true;
     this.auth.resetPassword(this.email).catch(error => (this.loading = false));
-    this.loading = false;
   }
 }

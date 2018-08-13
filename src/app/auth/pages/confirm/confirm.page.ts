@@ -26,7 +26,7 @@ export class ConfirmPage implements OnInit, OnDestroy {
     this.timerSubscription.unsubscribe();
   }
 
-  async sendVerify() {
-    await this.auth.sendEmailVerification();
+  sendVerify() {
+    this.auth.sendEmailVerification();
   }
 }

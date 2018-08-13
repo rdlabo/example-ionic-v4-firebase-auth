@@ -31,6 +31,6 @@ export class SigninPage implements OnInit {
 
   async doSingIn() {
     this.loading = true;
-    await this.auth.signIn(this.login.email, this.login.password).catch(error => (this.loading = false));
+    this.auth.signIn(this.login.email, this.login.password).catch(error => (this.loading = false));
   }
 }
