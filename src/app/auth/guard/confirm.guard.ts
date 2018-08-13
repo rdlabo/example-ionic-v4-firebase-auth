@@ -19,7 +19,7 @@ export class ConfirmGuard implements CanActivate {
         if (data !== null && !data.emailVerified) {
           return true;
         } else {
-          this.router.navigate(['/auth/singin']);
+          this.router.navigate(['/auth/signin']);
           return false;
         }
       }),

@@ -15,7 +15,7 @@ export class HomePage {
     this.auth
       .signOut()
       .then(data => {
-        this.router.navigate(['/auth/signup']);
+        this.router.navigate(['/auth/signin']);
       })
       .catch(error => (this.loading = false));
   }

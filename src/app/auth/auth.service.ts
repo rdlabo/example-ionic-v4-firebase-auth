@@ -11,8 +11,13 @@ import { User, auth } from 'firebase';
 export class AuthService {
   constructor(public afAuth: AngularFireAuth, public alertCtrl: AlertController, public toastCtrl: ToastController) {}
 
-  getState(): Observable<User | null> {
-    return this.afAuth.authState;
+  getState(isReload: boolean = false): Observable<User | null> {
+    if (isReload === true) {
+      this.afAuth.auth.currentUser.reload();
+      return this.afAuth.authState;
+    } else {
+      return this.afAuth.authState;
+    }
   }
   async signUp(email: string, password: string): Promise<void> {
     try {

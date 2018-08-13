@@ -16,8 +16,11 @@ export class UserGuard implements CanActivate {
         console.log(data);
         if (data !== null && data.emailVerified) {
           return true;
+        } else
+        if (data !== null && data.emailVerified) {
+          return true;
         } else {
-          this.router.navigate(['/auth/signin']);
+          this.router.navigate(['/auth/confirm']);
           return false;
         }
       }),
